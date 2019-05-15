@@ -10,16 +10,15 @@ export const FAILURE = 'FAILURE';
 // remember that now we have controll over our thunk-based action creator
 
 
-export const fetching = () => {
-  return {
-    axios.get('https://swapi.co/api/people')
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
-  }
-}
+export const fetchCharacters = () => dispatch => {
+    dispatch({ type: FETCHING })
+    axios.get('https://swapi.co/api/people/')
+      .then(res => { console.log(res)
+        dispatch({ type: SUCCESS, payload: res.data.results })
+      })
+      .catch(err => {
+        dispatch({ type: FAILURE, payload: err })
+      })
 
-export const success = () => {
-  return {
 
-  }
 }
